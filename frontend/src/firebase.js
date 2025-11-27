@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCHtiPnbOoRSkRS02nYEnQjMAqc7vfMWX0",
+  apiKey: "AIzaSyBZPmgFowjGRsjcWUP7bXZHLdwrpLSK4Rw",
   authDomain: "pothole-webapp.firebaseapp.com",
   projectId: "pothole-webapp",
   storageBucket: "pothole-webapp.firebasestorage.app",
