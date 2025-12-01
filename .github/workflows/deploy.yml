@@ -7,22 +7,25 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy Backend
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Cloud SDK
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SERVICE_KEY }}
+
+    - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
-        version: "latest"
         project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_key: ${{ secrets.GCP_SERVICE_KEY }}
 
-    - name: Configure Docker for Google Artifact Registry
-      run: gcloud auth configure-docker ${GITHUB_SERVER_NAME}-docker.pkg.dev --quiet
+    - name: Configure Docker for Artifact Registry
+      run: |
+        gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
 
     - name: Build and push container image
       run: |
@@ -39,4 +42,3 @@ jobs:
           --region ${{ secrets.GCP_REGION }} \
           --platform managed \
           --allow-unauthenticated
-
