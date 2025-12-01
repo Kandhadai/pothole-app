@@ -31,7 +31,7 @@ jobs:
       run: |
         IMAGE=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/pothole-backend
         echo "Building image: $IMAGE"
-        docker build -t $IMAGE .
+        docker build -t $IMAGE backend/
         docker push $IMAGE
 
     - name: Deploy to Cloud Run
